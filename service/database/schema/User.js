@@ -37,7 +37,7 @@ userSchema.pre('save', function (next) {
             next()
         })
     })
-})
+}) 
 userSchema.methods = {
     //密码比对的方法
     comparePassword:(_password,password)=>{
