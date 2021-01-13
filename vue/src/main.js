@@ -8,7 +8,7 @@ import axios from 'axios'
 Vue.use(Antd);
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
-Vue.prototype.$url = 'http://localhost:3000/'
+Vue.prototype.$url = 'http://39.109.114.126:3000/'
 
 new Vue({
   router,

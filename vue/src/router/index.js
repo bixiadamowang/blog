@@ -13,11 +13,15 @@ export const constantRoutes = [
     path: "/register",
     component: () => import("@/views/register"),
   },
+  {
+    path: "/login",
+    component: () => import("@/views/login"),
+  },
 ];
 
 const createRouter = () =>
   new Router({
-    mode: 'history', // require service support
+    mode: 'hash', // require service support
     routes: constantRoutes
   });
 

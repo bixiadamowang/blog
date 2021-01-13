@@ -7,6 +7,8 @@ let user = require('./api/User.js')
 const bodyParser = require('koa-bodyparser')
 const cors = require('koa2-cors')
 
+app.use(require('koa-static')(__dirname + '/public/dist'))
+
 app.use(bodyParser());
 app.use(cors());
 
@@ -19,11 +21,6 @@ router.use('/user',user.routes());
 (async () => {
   await connect();
   initSchemas()
-  // const User = mongoose.model('User')
-  // let oneUser = new User({ userName: 'jspang2', password: '123456' })
-  // oneUser.save().then(() => {
-  //   // console.log('插入成功')
-  // });
 })();
 
 app.use(async (ctx) => {
