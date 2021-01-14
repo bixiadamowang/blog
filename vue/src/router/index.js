@@ -12,6 +12,10 @@ export const constantRoutes = [
   // 管理员登录
   {
     path: "/",
+    component: () => import("@/components/Welcome"),
+  },
+  {
+    path: "/index",
     component: () => import("@/views/index"),
   },
   {

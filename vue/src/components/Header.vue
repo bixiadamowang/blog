@@ -4,7 +4,13 @@
       <a-col :span="8">
         <h1 class="logo">笔下大魔王的博客</h1>
       </a-col>
-      <a-col :span="8"> col-8 </a-col>
+      <a-col :span="8">
+        <ul class="ul">
+          <li>文章</li>
+          <li>相册</li>
+          <li>收藏</li>
+        </ul>
+      </a-col>
       <a-col :span="8" class="img-col">
         <img
           src="../assets/img/github.png"
@@ -75,6 +81,17 @@ export default {
   margin: 0 auto;
   height: 60px;
   line-height: 60px;
+  .ul {
+    li {
+      float: left;
+      width: 100px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-left: 30px;
+      color:#fff;
+      text-align: center;
+    }
+  }
   .logo {
     font-size: 24px;
     color: burlywood;
