@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import { login } from "@/api/login.js";
 export default {
   data() {
     return {
@@ -53,10 +54,9 @@ export default {
   },
   methods: {
     handleSubmit() {
-      console.log(this.formInline);
-      this.$axios.post(this.$url + `user/login`, this.formInline).then(res => {
+      login("user/login", this.formInline).then((res) => {
         console.log(res.data);
-      })
+      });
     },
   },
 };

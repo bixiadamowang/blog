@@ -4,18 +4,23 @@ import Router from "vue-router";
 Vue.use(Router);
 
 export const constantRoutes = [
+  {
+    path: "/404",
+    component: () => import("@/views/404"),
+  },
+  { path: "*", redirect: "/404" },
   // 管理员登录
   {
     path: "/",
-    redirect:'/register',
+    component: () => import("@/views/index"),
   },
   {
     path: "/register",
-    component: () => import("@/views/register"),
+    component: () => import("@/views/login/register"),
   },
   {
     path: "/login",
-    component: () => import("@/views/login"),
+    component: () => import("@/views/login/login"),
   },
 ];
 

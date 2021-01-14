@@ -4,11 +4,10 @@ import router from './router'
 import 'ant-design-vue/dist/antd.css';
 import Antd from 'ant-design-vue';
 import axios from 'axios'
+axios.defaults.baseURL='http://localhost:3000';
 
 Vue.use(Antd);
 Vue.config.productionTip = false
-Vue.prototype.$axios = axios
-Vue.prototype.$url = 'http://39.109.114.126:3000/'
 
 new Vue({
   router,

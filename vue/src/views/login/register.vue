@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import { register } from "@/api/login.js";
 export default {
   data() {
     return {
@@ -71,8 +72,7 @@ export default {
   },
   methods: {
     handleSubmit() {
-      this.$axios
-        .post(this.$url + `user/register`, this.formInline)
+      register('user/register', this.formInline)
         .then((res) => {
           console.log(res.data);
         });
