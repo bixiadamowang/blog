@@ -6,25 +6,24 @@ Vue.use(Router);
 export const constantRoutes = [
   {
     path: "/404",
-    component: () => import("@/views/404"),
+    component: () => import("@/components/404"),
   },
   { path: "*", redirect: "/404" },
-  // 管理员登录
   {
-    path: "/",
-    component: () => import("@/components/Welcome"),
-  },
-  {
-    path: "/index",
-    component: () => import("@/views/index"),
+    path: "/login",
+    component: () => import("@/components/login/login"),
   },
   {
     path: "/register",
-    component: () => import("@/views/login/register"),
+    component: () => import("@/components/login/register"),
   },
   {
-    path: "/login",
-    component: () => import("@/views/login/login"),
+    path: "/",
+    component: () => import("@/components/Welcome"),
+    register: '/blog',
+    children:[
+      {path:'/blog', component:() => import('@/views/blog')}
+    ]
   },
 ];
 
