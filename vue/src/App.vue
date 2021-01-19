@@ -12,6 +12,9 @@ export default {
 </script>
 
 <style>
+#app {
+  background: #f4f4f4;
+}
 body,
 h1,
 h2,

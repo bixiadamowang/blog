@@ -59,7 +59,7 @@ export default {
       );
     },
     goGithub() {
-      window.open("https://github.com/stormzhang/bixiadamowang");
+      window.open("https://github.com/bixiadamowang");
     },
     goLink(url) {
       this.$router.push("/" + url);
