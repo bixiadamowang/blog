@@ -8,17 +8,21 @@ Vue.use(Router);
 export const constantRoutes = [
   {
     path: "/404",
-    component: () => import("@/views/404"),
+    component: () => import("@/components/404"),
   },
   { path: "*", redirect: "/404" },
-  // 管理员登录
   {
+<<<<<<< HEAD
     path: "/",
     component: () => import("@/views/index"),
     redirect: '/blog',
     children:[
       {path: '/blog', component: () => import('@/views/blog/index')}
     ]
+=======
+    path: "/login",
+    component: () => import("@/components/login/login"),
+>>>>>>> dc3c28ba24894f1a76f9de7fcd4216c5cbf4d945
   },
   // {
   //   path: "/index",
@@ -26,11 +30,15 @@ export const constantRoutes = [
   // },
   {
     path: "/register",
-    component: () => import("@/views/login/register"),
+    component: () => import("@/components/login/register"),
   },
   {
-    path: "/login",
-    component: () => import("@/views/login/login"),
+    path: "/",
+    component: () => import("@/components/Welcome"),
+    register: '/blog',
+    children:[
+      {path:'/blog', component:() => import('@/views/blog')}
+    ]
   },
 ];
 

@@ -2,7 +2,7 @@
   <div>
     <a-row class="baner">
       <a-col :span="8">
-        <h1 class="logo">笔下大魔王的博客</h1>
+        <h1 class="logo">笔下的博客</h1>
       </a-col>
       <a-col :span="8">
         <ul class="ul">
