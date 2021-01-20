@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background: #fff">
     <a-row class="baner">
       <a-col :span="8">
         <h1 class="logo">笔下的博客</h1>
@@ -52,6 +52,11 @@ export default {
       wxShow: false,
     };
   },
+  watch: {
+    $route(to, from) {
+      console.log(to, from);
+    },
+  },
   methods: {
     addQQ() {
       window.open(
@@ -88,13 +93,13 @@ export default {
       font-size: 16px;
       cursor: pointer;
       margin-left: 30px;
-      color:#fff;
+      color: #999;
       text-align: center;
     }
   }
   .logo {
     font-size: 24px;
-    color: burlywood;
+    color: #1890ff;
   }
   .img-col {
     text-align: right;
