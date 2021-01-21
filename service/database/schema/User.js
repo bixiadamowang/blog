@@ -8,8 +8,10 @@ var SALT_WORK_FACTOR = 10;
 const userSchema = new Schema({
     UserId: ObjectId,
     userName: { unique: true, type: String },
+    sex: Number,
+    phone: { unique: true, type: String },
+    email: { unique: true, type: String },
     password: String,
-    rePassword: String,
     createAt: { type: Date, default: Date.now() },
     lastLoginAt: { type: Date, default: Date.now() }
 
@@ -29,26 +31,18 @@ userSchema.pre('save', function (next) {
             next()
         })
     })
-    bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
-        if (err) return next(err)
-        bcrypt.hash(this.rePassword, salt, (err, hash) => {
-            if (err) return next(err)
-            this.rePassword = hash
-            next()
-        })
-    })
-})  
-userSchema.methods = {
-    //密码比对的方法
-    comparePassword:(_password,password)=>{
-        return new Promise((resolve,reject)=>{
-            bcrypt.compare(_password,password,(err,isMatch)=>{
-                if(!err) resolve(isMatch)
-                else reject(err)
-            })
-        })
-    }
-}
+})
+// userSchema.methods = {
+//     //密码比对的方法
+//     comparePassword: (_password, password) => {
+//         return new Promise((resolve, reject) => {
+//             bcrypt.compare(_password, password, (err, isMatch) => {
+//                 if (!err) resolve(isMatch)
+//                 else reject(err)
+//             })
+//         })
+//     }
+// }
 
 //发布模型
 mongoose.model('User', userSchema)

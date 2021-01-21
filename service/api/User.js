@@ -13,7 +13,6 @@ router.post('/register', async (ctx) => {
   let newUser = new User(ctx.request.body)
   //用mongoose的save方法直接存储，然后判断是否成功，返回相应的结果
   await newUser.save().then(() => {
-    console.log(ctx.request.body);
     //成功返回code=200，并返回成功信息
     ctx.body = {
       code: 200,
@@ -31,7 +30,6 @@ router.post('/register', async (ctx) => {
 router.post('/login', async (ctx) => {
   //得到前端传递过来的数据
   let loginUser = ctx.request.body
-  console.log(loginUser)
   let userName = loginUser.userName
   let password = loginUser.password
   //引入User的model
@@ -61,5 +59,25 @@ router.post('/login', async (ctx) => {
     ctx.body = { code: 500, message: error }
   })
 })
+
+/*用户列表查询 */
+router
+  .get('/list', async (ctx) => {
+    //引入User的model
+    const User = mongoose.model('User')
+    let totle = await User.count();//表总记录数
+    //koa-bodyparser解析前端参数
+    let reqParam = ctx.request.body;//
+    let page = Number(reqParam.pageNo);//当前第几页
+    let size = Number(reqParam.pageSize);//每页显示的记录条数
+    //显示符合前端分页请求的列表查询
+    let options = { "limit": size, "skip": (page - 1) * size };
+    // let st = await User.find({});
+    let st = await User.find({}, options);
+    console.log(st)
+    ctx.response.type = 'application/json';
+    //返回给前端
+    ctx.body = { data: st, totle: totle };
+  })
 
 module.exports = router;

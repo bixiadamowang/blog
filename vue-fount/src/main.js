@@ -8,7 +8,8 @@ import axios from 'axios'
 Vue.use(Antd)
 
 Vue.config.productionTip = false
-axios.defaults.baseURL = 'http://39.109.114.126:9999';
+// axios.defaults.baseURL = 'http://39.109.114.126:9998';
+axios.defaults.baseURL = 'http://localhost:9998';
 
 new Vue({
   router,
