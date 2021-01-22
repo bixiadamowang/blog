@@ -71,7 +71,7 @@ export default {
   },
   methods: {
     changeSex(value) {
-      this.form["sex"] = value;
+      this.formInline["sex"] = value;
     },
     handleSubmit() {
       register("user/register", this.formInline).then((res) => {

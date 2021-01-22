@@ -71,9 +71,10 @@ router
     let page = Number(reqParam.pageNo);//当前第几页
     let size = Number(reqParam.pageSize);//每页显示的记录条数
     //显示符合前端分页请求的列表查询
-    let options = { "limit": size, "skip": (page - 1) * size };
-    // let st = await User.find({});
-    let st = await User.find({}, options);
+    // let options = { "limit": size, "skip": (page - 1) * size };
+    // let options = { "limit": 1, "skip": 0 };
+    // let st = await User.find({ "limit": 1, "skip": 0 });
+    let st = await User.find({}).limit(page).skip((page - 1) * size);
     console.log(st)
     ctx.response.type = 'application/json';
     //返回给前端
