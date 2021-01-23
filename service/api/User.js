@@ -65,17 +65,16 @@ router
   .get('/list', async (ctx) => {
     //引入User的model
     const User = mongoose.model('User')
-    let totle = await User.count();//表总记录数
     //koa-bodyparser解析前端参数
     let reqParam = ctx.request.body;//
     let page = Number(reqParam.pageNo);//当前第几页
-    let size = Number(reqParam.pageSize);//每页显示的记录条数
+    let size = Number(reqParam.pageSize);//每页显示的记录条数  
     //显示符合前端分页请求的列表查询
     // let options = { "limit": size, "skip": (page - 1) * size };
     // let options = { "limit": 1, "skip": 0 };
     // let st = await User.find({ "limit": 1, "skip": 0 });
-    let st = await User.find({}).limit(page).skip((page - 1) * size);
-    console.log(st)
+    let st = await User.find().limit(page).skip((page - 1) * size);
+    let totle = st.length; //表总记录数
     ctx.response.type = 'application/json';
     //返回给前端
     ctx.body = { data: st, totle: totle };

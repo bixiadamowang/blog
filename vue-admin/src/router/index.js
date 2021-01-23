@@ -28,6 +28,10 @@ const routes = [
         path: '/index/user', name: 'user', component: () => import('@/views/system/user'),
         meta: { title: '用户管理' },
       },
+      {
+        path: '/index/photo', name: 'photo', component: () => import('@/views/system/photo'),
+        meta: { title: '照片管理' },
+      },
       // {
       //   path: '/index/role', name: 'role', component: () => import('@/views/system/role'),
       //   meta: { title: '角色管理' },

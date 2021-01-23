@@ -6,11 +6,11 @@
         <a-col :span="4">
           <a-col :span="6" class="left-write">用户名</a-col>
           <a-col :span="18" class="right-input">
-            <a-input placeholder="请输入用户名" />
+            <a-input placeholder="请输入用户名" v-model="searchPage.keyword" />
           </a-col>
         </a-col>
         <a-col :span="20" style="text-align: right">
-          <a-button type="primary"> 查询 </a-button>
+          <a-button type="primary" @click="search"> 查询 </a-button>
         </a-col>
       </a-row>
       <div style="margin-top: 10px; text-align: right">
@@ -26,7 +26,7 @@
       :data="data"
     >
       <vxe-table-column type="seq" title="序号" width="60"></vxe-table-column>
-      <vxe-table-column field="name" title="姓名"></vxe-table-column>
+      <vxe-table-column field="userName" title="姓名"></vxe-table-column>
       <vxe-table-column field="sex" title="性别">
         <template v-slot="{ row }">
           <span>{{ row.sex === 1 ? "男" : "女" }}</span>
@@ -78,6 +78,9 @@ export default {
     create() {},
     edit(row) {},
     del(row) {},
+    search() {
+      this.getList(this.searchPage);
+    }
   },
 };
 </script>

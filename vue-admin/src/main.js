@@ -7,10 +7,12 @@ import '@/permission' // 跳转进度条
 import 'xe-utils'
 import VXETable from 'vxe-table'
 import 'vxe-table/lib/style.css'
+import axios from 'axios'
 
 Vue.use(VXETable)
 Vue.use(Antd)
 Vue.config.productionTip = false
+Vue.prototype.axios = axios
 
 new Vue({
   router,
