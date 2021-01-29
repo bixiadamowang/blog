@@ -1,9 +1,9 @@
 <template>
   <div>
+    <img :src="img" alt="" />
     <a-upload
       name="file"
       :multiple="false"
-      @change="changeFile"
       :customRequest="customRequest"
     >
       <img v-if="imageUrl" :src="imageUrl" alt="avatar" />
@@ -21,13 +21,14 @@ export default {
     return {
       loading: false,
       imageUrl: "",
+      img: "",
     };
   },
   methods: {
     changeFile(info) {
       // 上传文件
       if (info.file.status !== "uploading") {
-        console.log(info.file, info.fileList);
+        // console.log(info.file, info.fileList);
       }
       if (info.file.status === "done") {
         this.$message.success(`${info.file.name} 上传成功`);
@@ -50,7 +51,14 @@ export default {
         data: formData,
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response.data.img.data);
+          let bytes = new Uint8Array(response.data.img.data);
+          let data = "";
+          let len = bytes.byteLength;
+          for (let i = 0; i < len; i++) {
+            data += String.fromCharCode(bytes[i]);
+          }
+          this.img = "data:image/png;base64," + window.btoa(data);
         })
         .catch(function (error) {
           console.log(error);

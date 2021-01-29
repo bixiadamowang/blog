@@ -19,6 +19,7 @@
             >
             <a-menu-item key="/user">用户管理</a-menu-item>
             <a-menu-item key="/photo">照片管理</a-menu-item>
+            <a-menu-item key="/blog">博客管理</a-menu-item>
           </a-sub-menu>
         </a-menu>
       </a-layout-sider>

@@ -27,6 +27,10 @@ export const constantRoutes = [
     path: "/register",
     component: () => import("@/components/login/register"),
   },
+  {
+    path: "/login",
+    component: () => import("@/components/login/login"),
+  },
 ];
 
 const createRouter = () =>

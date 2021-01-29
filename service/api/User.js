@@ -1,5 +1,6 @@
 const Router = require('koa-router')
 const mongoose = require('mongoose')
+const jwt = require('jsonwebtoken')
 let router = new Router()
 
 router.get('/', async (ctx) => {
@@ -40,10 +41,23 @@ router.post('/login', async (ctx) => {
       //console.log(User)
       //当用户名存在时，开始比对密码
       let newUser = new User()  //因为是实例方法，所以要new出对象，才能调用
+      // 创建一个token
+      const token = jwt.sign({
+        //token的创建日期
+        time: Date.now(),
+        //token的过期时间
+        timeout: Date.now() + 60000,
+        username: userName,
+      }, 'token')
+
+
+      // 解析token
+
+      // const data = jwt.verify(token, 'token')
       await newUser.comparePassword(password, result.password)
         .then((isMatch) => {
           //返回比对结果
-          ctx.body = { code: 200, message: isMatch }
+          ctx.body = { code: 200, message: isMatch, data:token }
         })
         .catch(error => {
           //出现异常，返回异常
