@@ -1,6 +1,5 @@
 <template>
   <div>
-    <img :src="img" alt="" />
     <a-upload
       name="file"
       :multiple="false"
@@ -21,7 +20,6 @@ export default {
     return {
       loading: false,
       imageUrl: "",
-      img: "",
     };
   },
   methods: {
@@ -51,14 +49,8 @@ export default {
         data: formData,
       })
         .then((response) => {
-          // console.log(response.data.img.data);
-          let bytes = new Uint8Array(response.data.img.data);
-          let data = "";
-          let len = bytes.byteLength;
-          for (let i = 0; i < len; i++) {
-            data += String.fromCharCode(bytes[i]);
-          }
-          this.img = "data:image/png;base64," + window.btoa(data);
+          console.log(response.data.img);
+          this.imageUrl = response.data.img
         })
         .catch(function (error) {
           console.log(error);

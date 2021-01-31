@@ -55,6 +55,11 @@ export default {
   created() {
     this.portalToken = sessionStorage.getItem("portalToken");
   },
+  beforeDestroy() {
+    // 销毁编辑器
+    this.editor.destroy()
+    this.editor = null
+  },
   methods: {
     seteditor() {
       // http://192.168.2.125:8080/admin/storage/create
@@ -70,6 +75,7 @@ export default {
       }; // 自定义 header
       this.editor.customConfig.uploadFileName = "file"; // 后端接受上传文件的参数名
       this.editor.customConfig.uploadImgMaxSize = 2 * 1024 * 1024; // 将图片大小限制为 2M
+      this.editor.customConfig.uploadImgAccept = ["jpg", "jpeg", "png"];
       this.editor.customConfig.uploadImgMaxLength = 6; // 限制一次最多上传 3 张图片
       this.editor.customConfig.uploadImgTimeout = 3 * 60 * 1000; // 设置超时时间
 
@@ -97,68 +103,55 @@ export default {
         "redo", // 重复
         "fullscreen", // 全屏
       ];
-      let _that = this;
-      this.editor.config.customUploadImg = function (resultFiles, insertImgFn) {
-        const formData = new FormData();
-        formData.append("file", resultFiles[0]);
-        _that.axios({
-          method: "post",
-          url: "/photo/upload",
-          headers: {},
-          params: {},
-          data: formData,
-        }).then((response) => {
-          console.log(response.data);
-          let bytes = new Uint8Array(response.data.img.data);
-          let data = "";
-          let len = bytes.byteLength;
-          for (let i = 0; i < len; i++) {
-            data += String.fromCharCode(bytes[i]);
-          }
-          var img = "data:image/png;base64," + window.btoa(data);
-          insertImgFn(img);
-        });
-        // console.log(resultFiles);
-        // console.log(insertImgFn);
-        // resultFiles 是 input 中选中的文件列表
-        // insertImgFn 是获取图片 url 后，插入到编辑器的方法
+      // let _that = this;
+      // this.editor.customConfig.customUploadImg = (resultFiles, insertImgFn) => {
+      // debugger
+      //   console.log(resultFiles);
+      //   const formData = new FormData();
+      //   formData.append("file", resultFiles[0]);
+      //   _that.axios({
+      //     method: "post",
+      //     url: "/photo/upload",
+      //     headers: {},
+      //     params: {},
+      //     data: formData,
+      //   }).then((response) => {
+      //     let img = response.data.img
+      //     insertImgFn(img);
+      //   });
+      //   // console.log(resultFiles);
+      //   // console.log(insertImgFn);
+      //   // resultFiles 是 input 中选中的文件列表
+      //   // insertImgFn 是获取图片 url 后，插入到编辑器的方法
 
-        // 上传图片，返回结果，将图片插入到编辑器中
-        // insertImgFn(imgUrl);
-      };
-      // this.editor.customConfig.uploadImgHooks = {
-      //   fail: (xhr, editor, result) => {
-      //     console.log(xhr, editor, result);
-      //     // 插入图片失败回调
-      //   },
-      //   success: (xhr, editor, result) => {
-      //     console.log(xhr, editor, result);
-      //     // 图片上传成功回调
-      //   },
-      //   timeout: (xhr, editor) => {
-      //     console.log(xhr, editor);
-      //     // 网络超时的回调
-      //   },
-      //   error: (xhr, editor) => {
-      //     console.log(xhr, editor);
-      //     // 图片上传错误的回调
-      //   },
-      //   customInsert: (insertImg, result, editor) => {
-      //     console.log(result.data);
-      //     console.log(insertImg, editor);
-      //     // 图片上传成功，插入图片的回调
-      //     //result为上传图片成功的时候返回的数据，这里我打印了一下发现后台返回的是data：[{url:"路径的形式"},...]
-      //     // console.log(result.data[0].url)
-      //     //insertImg()为插入图片的函数
-      //     //循环插入图片
-      //     // for (let i = 0; i < 1; i++) {
-      //     // console.log(result)
-      //     let url = result.data;
-      //     console.log(result.data)
-      //     insertImg(url);
-      //     // }
-      //   },
+      //   // 上传图片，返回结果，将图片插入到编辑器中
+      //   // insertImgFn(imgUrl);
       // };
+      this.editor.customConfig.uploadImgHooks = {
+        fail: (xhr, editor, result) => {
+          console.log(xhr, editor, result);
+          // 插入图片失败回调
+        },
+        success: (xhr, editor, result) => {
+          console.log(xhr, editor, result);
+          // 图片上传成功回调
+        },
+        timeout: (xhr, editor) => {
+          console.log(xhr, editor);
+          // 网络超时的回调
+        },
+        error: (xhr, editor) => {
+          console.log(xhr, editor);
+          // 图片上传错误的回调
+        },
+        customInsert: (insertImg, result, editor) => {
+          console.log(result);
+          console.log(insertImg, editor);
+          console.log(editor);
+          let url = result.img;
+          insertImg(url);
+        },
+      };
       this.editor.customConfig.onchange = (html) => {
         this.info_ = html; // 绑定当前逐渐地值
         this.$emit("change", this.info_); // 将内容同步到父组件中

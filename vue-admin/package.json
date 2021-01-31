@@ -16,8 +16,8 @@
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vxe-table": "^3.0.28",
-    "xe-utils": "^3.1.2",
-    "wangeditor": "^4.5.4"
+    "wangeditor": "^4.6.5",
+    "xe-utils": "^3.1.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

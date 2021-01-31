@@ -8,6 +8,7 @@ import 'xe-utils'
 import VXETable from 'vxe-table'
 import 'vxe-table/lib/style.css'
 import axios from 'axios'
+Vue.config.devtools = true
 
 Vue.use(VXETable)
 Vue.use(Antd)

@@ -104,7 +104,7 @@ export default {
     };
   },
   created() {
-    this.getList(this.searchPage);
+    // this.getList(this.searchPage);
   },
   methods: {
     /**

@@ -24,9 +24,9 @@ router.use('/photo', photo.routes());
   initSchemas()
 })();
 
-app.use(async (ctx) => {
-  ctx.body = '<h1>body</h1>'
-})
+// app.use(async (ctx) => {
+//   ctx.body = '<h1>body</h1>'
+// })
 
 app.listen(9998, () => {
   console.log('服务已启动!')
