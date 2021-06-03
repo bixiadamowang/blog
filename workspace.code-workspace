@@ -1,0 +1,17 @@
+{
+    "folders": [
+		{
+			"name": "vue-fount",
+			"path": "vue-fount"
+		},
+		{
+			"name": "vue-admin",
+			"path": "vue-admin"
+		},
+		{
+			"name": "service",
+			"path": "service"
+		}
+	],
+    "settings": {}
+}

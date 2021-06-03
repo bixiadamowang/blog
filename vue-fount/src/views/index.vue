@@ -4,7 +4,7 @@
     <div class="content">
       <router-view></router-view>
       <a-drawer
-        title="Basic Drawer"
+        title="笔下大魔王"
         placement="right"
         :closable="false"
         :visible="visible"
@@ -48,21 +48,16 @@ export default {
 
 <style lang="less" scoped>
 .bgc {
-  background: url('../assets/img/bgc.gif') no-repeat;
+  background: url('../assets/img/bgc.jpg') no-repeat;
   background-size: 100% 100%;
+  height: 100vh;
 }
 .content {
   width: 1200px;
   margin: 0 auto;
 }
-.right {
-  position: absolute;
-  right: 140px;
-  top: 160px;
-  border-radius: 10px;
-  padding: 20px;
-}
 .open {
+  color:#fff;
   position: fixed;
   top: 200px;
   right: 0px;

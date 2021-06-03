@@ -26,7 +26,7 @@
           alt=""
           title="微信"
         />
-        <img
+        <!-- <img
           src="../assets/img/icon.png"
           @click="goLink('login')"
           alt=""
@@ -37,7 +37,7 @@
           @click="goLink('register')"
           alt=""
           title="注册"
-        />
+        /> -->
         <img src="../assets/img/wx.png" v-if="wxShow" class="wxImg" alt="" />
       </a-col>
     </a-row>

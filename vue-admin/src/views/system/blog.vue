@@ -13,10 +13,8 @@
     >
       <vxe-table-column type="seq" title="序号" width="60"></vxe-table-column>
       <vxe-table-column field="title" title="标题"></vxe-table-column>
-      <vxe-table-column field="agree" title="点赞数"></vxe-table-column>
-      <vxe-table-column field="collect" title="收藏数"></vxe-table-column>
       <vxe-table-column field="time" title="创建时间"></vxe-table-column>
-      <vxe-table-column field="action" title="操作">
+      <vxe-table-column field="action" title="操作" width="180">
         <template v-slot="{ row }">
           <a-button type="primary" @click="edite(row)"> 编辑 </a-button>
           <a-button
@@ -56,20 +54,33 @@
             "
           />
         </a-form-model-item>
+        <a-form-model-item label="日期" required prop="time">
+          <a-date-picker
+            v-model="form.time"
+            show-time
+            type="date"
+            format="YYYY-MM-DD"
+            placeholder="选择日期"
+            style="width: 100%"
+            @change="onChange"
+          />
+        </a-form-model-item>
+        <a-form-model-item label="内容" required prop="content">
+          <editor-bar
+            v-model="form.content"
+            :isClear="isClear"
+            @change="change"
+            style="width: 800px"
+          ></editor-bar>
+        </a-form-model-item>
       </a-form-model>
-      <editor-bar
-        v-model="form.content"
-        :isClear="isClear"
-        @change="change"
-        style="width: 800px"
-      ></editor-bar>
     </a-modal>
   </div>
 </template>
 
 <script>
-import { getBlogList } from "@/api/blog.js";
-import EditorBar from "../../components/wangEdit";
+import { getBlogList,insertBlog } from "@/api/blog.js";
+import EditorBar from "@/components/wangEdit";
 export default {
   components: {
     EditorBar, //ueditor富文本编辑器
@@ -88,14 +99,29 @@ export default {
       wrapperCol: { span: 16 },
       form: {
         title: "",
-        content:''
+        time:'',
+        content: "",
       },
       rules: {
         title: [
           {
             required: true,
             message: "请输入标题",
-            trigger: "blur",
+            trigger: "change",
+          },
+        ],
+        time: [
+          {
+            required: true,
+            message: "请选择时间",
+            trigger: "change",
+          },
+        ],
+        content: [
+          {
+            required: true,
+            message: "请输入内容",
+            trigger: "change",
           },
         ],
       },
@@ -104,7 +130,7 @@ export default {
     };
   },
   created() {
-    // this.getList(this.searchPage);
+    this.getList(this.searchPage);
   },
   methods: {
     /**
@@ -115,30 +141,53 @@ export default {
         this.data = res.data;
       });
     },
+    /**
+     * 新增模态框
+     */
     create() {
       this.visible = true;
+      this.form = {
+        title:'',
+        time:'',
+        content:''
+      }
     },
+    /**
+     * 选择日期
+     */
+    onChange(val,mode) {
+      this.form['time'] = mode;
+    },
+    /**
+     * 确认模态
+     */
     handleOk(e) {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
           this.confirmLoading = true;
-          setTimeout(() => {
-            console.log(this.form);
+          insertBlog(this.form).then(res => {
+            this.getList(this.searchPage);
             this.visible = false;
             this.confirmLoading = false;
-          }, 2000);
+          })
         } else {
           console.log("error submit!!");
           return false;
         }
       });
     },
+    /**
+     * 取消模态
+     */
     handleCancel(e) {
       console.log("Clicked cancel button");
       this.visible = false;
     },
     edit(row) {},
     del(row) {},
+    /**
+     * 搜索
+     */
     search() {
       this.getList(this.searchPage);
     },
