@@ -3,10 +3,8 @@
     <a-list
       item-layout="vertical"
       size="large"
-      :pagination="pagination"
       :data-source="data"
     >
-      <div slot="footer"><b>ant design vue</b> footer part</div>
       <a-list-item slot="renderItem" key="item.title" slot-scope="item">
         <a-list-item-meta :description="item.description">
           <a slot="title" :href="item.href">{{ item.title }}</a>
@@ -60,5 +58,6 @@ export default {
   min-height: 400px;
   // max-height: 800px;
   overflow: auto;
+  margin-bottom: 40px;
 }
 </style>

@@ -4,7 +4,7 @@
     <div class="content">
       <router-view></router-view>
       <a-drawer
-        title="笔下大魔王"
+        title="笔下大魔王(右键新窗口打开看高清)"
         placement="right"
         :closable="false"
         :visible="visible"
@@ -13,7 +13,7 @@
       >
         <Introduction class="right"></Introduction>
       </a-drawer>
-      <div class="open" @click="visible = true">打开个人信息</div>
+      <div class="open" @click="visible = true">照片墙</div>
     </div>
   </div>
 </template>
@@ -50,11 +50,11 @@ export default {
 .bgc {
   background: url('../assets/img/bgc.jpg') no-repeat;
   background-size: 100% 100%;
-  height: 100vh;
 }
 .content {
   width: 1200px;
   margin: 0 auto;
+  padding-bottom: 30px;
 }
 .open {
   color:#fff;

@@ -69,7 +69,7 @@ export default {
         : this.editor.config;
       this.editor.customConfig.uploadImgShowBase64 = false; // base 64 存储图片
       this.editor.customConfig.uploadImgServer =
-        "http://localhost:9998/photo/upload"; // 配置服务器端地址
+        "http://141.164.50.57:9998/photo/upload"; // 配置服务器端地址
       this.editor.customConfig.uploadImgHeaders = {
         // portalToken: this.portalToken,
       }; // 自定义 header

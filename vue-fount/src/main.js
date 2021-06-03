@@ -8,10 +8,10 @@ import axios from 'axios'
 Vue.use(Antd)
 
 Vue.config.productionTip = false
-// axios.defaults.baseURL = 'http://39.109.114.126:9998';
-axios.defaults.baseURL = 'http://localhost:9998';
+axios.defaults.baseURL = 'http://141.164.50.57:9998';
+// axios.defaults.baseURL = 'http://localhost:9998';
 
 new Vue({
-  router,
-  render: h => h(App),
+    router,
+    render: h => h(App),
 }).$mount('#app')
